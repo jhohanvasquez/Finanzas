@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Finanzas.Infraestructure.Interfaces;
 using Finanzas.Infraestructure.Repositories.Configuration;
+using Finanzas.ServiceCore.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Repositories;
 
 namespace finanzas_api
 {
@@ -28,6 +31,10 @@ namespace finanzas_api
             services.AddControllers();
 
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+
+            services.AddTransient<IDeudaRepository, DeudaRepository>();
+            services.AddTransient<IPagoRepository, PagoRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

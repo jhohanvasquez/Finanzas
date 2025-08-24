@@ -6,10 +6,11 @@ using Models;
 using System;
 using Finanzas.Infraestructure.Repositories.Configuration;
 using Microsoft.Extensions.Options;
+using Finanzas.Infraestructure.Interfaces;
 
 namespace Repositories
 {
-    public class PagoRepository
+    public class PagoRepository : IPagoRepository
     {
         private readonly ConnectionStrings _settings;
         public PagoRepository(IOptions<ConnectionStrings> settings)

@@ -10,6 +10,5 @@ namespace Finanzas.Infraestructure.Interfaces
     public interface IPagoRepository
     {
         Task<int> RegistrarPago(Pago pago);
-        Task<IEnumerable<dynamic>> ConsultarDeudas(int? usuarioId = null);
     }
 }

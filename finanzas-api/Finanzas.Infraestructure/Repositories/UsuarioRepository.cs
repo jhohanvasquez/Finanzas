@@ -7,10 +7,11 @@ using Models;
 using System;
 using Finanzas.Infraestructure.Repositories.Configuration;
 using Microsoft.Extensions.Options;
+using Finanzas.Infraestructure.Interfaces;
 
 namespace Repositories
 {
-    public class UsuarioRepository
+    public class UsuarioRepository : IUsuarioRepository
     {
         private readonly ConnectionStrings _settings;
         public UsuarioRepository(IOptions<ConnectionStrings> settings)
