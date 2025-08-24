@@ -1,4 +1,5 @@
 ﻿using Finanzas.ServiceCore.Interfaces;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,22 @@ namespace Finanzas.ServiceCore.Service
 {
     public class UsuarioService
     {
-        private readonly IDeudaRepository _deudaRepository;
+        private readonly IUsuarioService _usuarioRepository;
 
-        public UsuarioService(IDeudaRepository deudaRepository)
+        public UsuarioService(IUsuarioService usuarioRepository)
         {
-            this._deudaRepository = deudaRepository;
+            this._usuarioRepository = usuarioRepository;
+        }
+        public Task<int> RegistrarPago(Pago pago)
+        {
+            var pagoInfraestructura = new Pago
+            {
+                PagoId = pago.PagoId,
+                DeudaId = pago.DeudaId,
+                MontoPago = pago.MontoPago,
+                MetodoPago = pago.MetodoPago
+            };
+            return _usuarioRepository.RegistrarPago(pagoInfraestructura);
         }
     }
 }

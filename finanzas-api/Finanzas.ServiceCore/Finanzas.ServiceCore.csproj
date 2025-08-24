@@ -44,9 +44,9 @@
     <Compile Include="DTOs\DeudaDtos.cs" />
     <Compile Include="DTOs\PagoDtos.cs" />
     <Compile Include="DTOs\UsuarioDtos.cs" />
-    <Compile Include="Models\Deuda.cs" />
-    <Compile Include="Models\Pago.cs" />
-    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Interfaces\IDeudaService.cs" />
+    <Compile Include="Interfaces\IUsuarioService.cs" />
+    <Compile Include="Interfaces\IPagoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\DeudaService.cs" />
     <Compile Include="Service\PagoService.cs" />
@@ -58,8 +58,6 @@
       <Name>Finanzas.Infraestructure</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
