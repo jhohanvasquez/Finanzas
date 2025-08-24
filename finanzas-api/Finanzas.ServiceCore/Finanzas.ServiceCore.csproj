@@ -41,12 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTOs\DeudaDtos.cs" />
-    <Compile Include="DTOs\PagoDtos.cs" />
-    <Compile Include="DTOs\UsuarioDtos.cs" />
-    <Compile Include="Models\Deuda.cs" />
-    <Compile Include="Models\Pago.cs" />
-    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
