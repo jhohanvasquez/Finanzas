@@ -41,7 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\DeudaDtos.cs" />
+    <Compile Include="DTOs\PagoDtos.cs" />
+    <Compile Include="DTOs\UsuarioDtos.cs" />
+    <Compile Include="Models\Deuda.cs" />
+    <Compile Include="Models\Pago.cs" />
+    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Finanzas.Infraestructure\Finanzas.Infraestructure.csproj">
+      <Project>{9fbbae5d-4526-4a64-a869-fc5555e0ac8f}</Project>
+      <Name>Finanzas.Infraestructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Service\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
