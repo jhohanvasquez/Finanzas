@@ -5,7 +5,7 @@ using System.Text;
 using Repositories;
 using Models;
 
-namespace Controllers
+namespace Finanzas.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

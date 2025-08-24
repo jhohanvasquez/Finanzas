@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Finanzas.Api.Service;
 using Finanzas.Infraestructure.Interfaces;
 using Finanzas.Infraestructure.Repositories.Configuration;
 using Finanzas.ServiceCore.Interfaces;
@@ -13,8 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Repositories;
+using StackExchange.Redis;
 
-namespace finanzas_api
+namespace Finanzas.Api
 {
     public class Startup
     {
@@ -30,7 +32,17 @@ namespace finanzas_api
         {
             services.AddControllers();
 
+            // Registro de la conexión a la base de datos SQL
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
+
+            // Registro de la conexión a la REDIS
+            services.AddSingleton<IConnectionMultiplexer>(
+                ConnectionMultiplexer.Connect(Configuration.GetConnectionString("RedisConnection")));
+
+            services.AddScoped<UsuarioRepository>();
+            services.AddScoped<DeudaRepository>();
+            services.AddScoped<PagoRepository>();
+            services.AddScoped<CacheService>();
 
             services.AddTransient<IDeudaRepository, DeudaRepository>();
             services.AddTransient<IPagoRepository, PagoRepository>();

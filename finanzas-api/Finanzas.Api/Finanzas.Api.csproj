@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>finanzas_api</RootNamespace>
+    <RootNamespace>Finanzas.Api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using StackExchange.Redis;
 
-namespace Services
+namespace Finanzas.Api.Service
 {
     public class CacheService
     {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Repositories;
-using Services;
 using Models;
+using Finanzas.Api.Service;
 
-namespace Controllers
+namespace Finanzas.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
