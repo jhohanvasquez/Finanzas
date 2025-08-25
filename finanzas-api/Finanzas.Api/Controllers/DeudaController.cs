@@ -19,6 +19,11 @@ namespace Finanzas.Api.Controllers
             _cache = cache;
         }
 
+        /// <summary>
+        /// Registra una nueva deuda para el usuario.
+        /// </summary>
+        /// <param name="deuda">Datos de la deuda.</param>
+        /// <returns>Mensaje y filas afectadas.</returns>
         [HttpPost("registrar")]
         public async Task<IActionResult> Registrar([FromBody] Deuda deuda)
         {
@@ -27,6 +32,11 @@ namespace Finanzas.Api.Controllers
             return Ok(new { message = "Deuda registrada", rows = result });
         }
 
+        /// <summary>
+        /// Consulta las deudas de un usuario.
+        /// </summary>
+        /// <param name="usuarioId">ID del usuario.</param>
+        /// <returns>Lista de deudas.</returns>
         [HttpGet("consultar/{usuarioId}")]
         public async Task<IActionResult> Consultar(int usuarioId)
         {
@@ -38,5 +48,6 @@ namespace Finanzas.Api.Controllers
             await _cache.SetAsync(cacheKey, result, TimeSpan.FromMinutes(5));
             return Ok(result);
         }
+
     }
 }
