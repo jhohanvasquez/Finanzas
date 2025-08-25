@@ -429,4 +429,31 @@ FodyWeavers.xsd
 .angular/
 dist/
 
+
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+npm-debug.log
+yarn-error.log
+
+# VS / .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+*.swp
+*.dbmdl
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.*
+
