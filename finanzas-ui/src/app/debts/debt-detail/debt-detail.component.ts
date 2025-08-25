@@ -43,16 +43,48 @@ export class DeudaDetailComponent implements OnInit {
   }
 
   cargar(id: number) {
-      // No hay endpoint para consultar una sola deuda, se puede obtener de la lista si es necesario
-      // Aquí se podría hacer una consulta por usuario y filtrar por id
-      this.api.getDeudasPorUsuario(1).subscribe(deudas => {
-        // Si la respuesta viene en formato transformado, buscar por id
-        let deuda = null;
-        if (Array.isArray(deudas)) {
-          deuda = deudas.find(x => x.deudaId === id) || null;
+      // Consulta todas las deudas y busca la que coincide con el id
+      console.log('Iniciando carga de detalle para id:', id);
+      this.api.getDeudasPorUsuario(1).subscribe({
+        next: (deudas) => {
+          alert('Respuesta de la API en detalle: ' + JSON.stringify(deudas));
+          console.log('Respuesta de la API en detalle:', JSON.stringify(deudas));
+          let deuda: Deuda | null = null;
+          // Si la respuesta es un solo objeto, úsalo directamente
+          if (deudas && typeof deudas === 'object' && !Array.isArray(deudas) && ('DeudaId' in deudas || 'deudaId' in deudas)) {
+            const obj = deudas as any;
+            alert('Deuda encontrada como objeto: ' + JSON.stringify(obj));
+            console.log('Deuda encontrada como objeto:', JSON.stringify(obj));
+            deuda = {
+              deudaId: Number(obj.DeudaId ?? obj.deudaId),
+              usuarioId: obj.usuarioId ?? 1,
+              descripcion: String(obj.Nombre ?? obj.descripcion ?? ''),
+              montoTotal: Number(obj.MontoTotal ?? obj.montoTotal ?? 0),
+              estado: String(obj.Estado ?? obj.estado ?? '')
+            };
+          } else if (Array.isArray(deudas)) {
+            // Si es array de objetos tipo {DeudaId, ...}
+            const encontrada = (deudas as any[]).find(x => Number(x.deudaId ?? x.DeudaId) === id);
+            console.log('Deuda encontrada en array:', JSON.stringify(encontrada));
+            if (encontrada) {
+              deuda = {
+                deudaId: Number(encontrada.DeudaId ?? encontrada.deudaId),
+                usuarioId: encontrada.usuarioId ?? 1,
+                descripcion: String(encontrada.Nombre ?? encontrada.descripcion ?? ''),
+                montoTotal: Number(encontrada.MontoTotal ?? encontrada.montoTotal ?? 0),
+                estado: String(encontrada.Estado ?? encontrada.estado ?? '')
+              };
+            }
+          }
+          alert('Deuda final para mostrar: ' + JSON.stringify(deuda));
+          console.log('Deuda final para mostrar:', JSON.stringify(deuda));
+          this.deuda.set(deuda);
+          if (deuda) this.form.patchValue({ descripcion: deuda.descripcion, montoTotal: deuda.montoTotal });
+        },
+        error: (err) => {
+          alert('Error al consultar la deuda: ' + JSON.stringify(err));
+          console.error('Error al consultar la deuda:', err);
         }
-        this.deuda.set(deuda);
-        if (deuda) this.form.patchValue({ descripcion: deuda.descripcion, montoTotal: deuda.montoTotal });
       });
   }
 
