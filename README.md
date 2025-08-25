@@ -216,4 +216,7 @@ Para dudas o soporte, abre un issue en el repositorio.
 
 <img width="875" height="443" alt="image" src="https://github.com/user-attachments/assets/f54070ec-8184-493b-a9ba-23503693f68d" />
 
+<img width="945" height="345" alt="image" src="https://github.com/user-attachments/assets/7e07968e-0bd9-4fb2-9101-6d05f63ce233" />
+
+
 
