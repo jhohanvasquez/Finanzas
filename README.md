@@ -12,7 +12,7 @@ Sistema de gestión de deudas y pagos
 
 ### Backend (API)
 1. Clona el repositorio del backend.
-2. Ejecuta el scrip de base de datos se encuentra en la carpeta de scriptdb.
+2. Ejecuta el script de base de datos, se encuentra en la carpeta de scriptdb.
 3. Instala los paquetes NuGet necesarios:
    - Microsoft.AspNetCore.Cors
    - Otros según tu archivo .csproj
