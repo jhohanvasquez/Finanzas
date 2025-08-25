@@ -1,0 +1,118 @@
+{
+  "info": {
+    "name": "FinanzasDB API",
+    "description": "Colección de endpoints de la API FinanzasDB",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Usuario - Registrar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuarioId\": 0,\n  \"nombre\": \"Juan Pérez\",\n  \"email\": \"juan.perez@email.com\",\n  \"passwordHash\": \"MiContraseñaSegura123\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Usuario/registrar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Usuario",
+            "registrar"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Deuda - Registrar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"deudaId\": 0,\n  \"usuarioId\": 1,\n  \"montoTotal\": 1500.50,\n  \"descripcion\": \"Préstamo personal\",\n  \"estado\": \"Pendiente\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Deuda/registrar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Deuda",
+            "registrar"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Deuda - Consultar por Usuario",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/Deuda/consultar/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Deuda",
+            "consultar",
+            "1"
+          ]
+        }
+      }
+    },
+    {
+      "name": "Pago - Registrar",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"pagoId\": 0,\n  \"deudaId\": 1,\n  \"montoPago\": 500.00,\n  \"metodoPago\": \"Transferencia\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/Pago/registrar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "Pago",
+            "registrar"
+          ]
+        }
+      }
+    }
+  ]
+}
