@@ -1,0 +1,34 @@
+/* Modern monochrome Material-inspired styles for confirm dialog */
+
+.dialog-container {
+  background: #fff;
+  color: #222;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  padding: 32px 24px;
+  min-width: 320px;
+  max-width: 420px;
+  min-height: 210px;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+button, button[mat-raised-button], button[mat-button] {
+  background: #3f51b5 !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 6px;
+  padding: 1.1rem 1.4rem;
+  font-size: 1.08rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover, button[mat-raised-button]:hover, button[mat-button]:hover {
+  background: #222 !important;
+}

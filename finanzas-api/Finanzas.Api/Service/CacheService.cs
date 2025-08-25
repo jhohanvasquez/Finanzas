@@ -12,16 +12,54 @@ namespace Finanzas.Api.Service
 
         public async Task SetAsync(string key, object value, TimeSpan? expiry = null)
         {
-            var json = JsonSerializer.Serialize(value);
-            await _cache.StringSetAsync(key, json, expiry);
+            try
+            {
+                var json = JsonSerializer.Serialize(value);
+                await _cache.StringSetAsync(key, json, expiry);
+            }
+            catch (RedisConnectionException)
+            {
+                // Redis no disponible, continuar sin cachear
+            }
+            catch (Exception)
+            {
+                // Otros errores, continuar sin cachear
+            }
         }
 
         public async Task<T> GetAsync<T>(string key)
         {
-            var value = await _cache.StringGetAsync(key);
-            return value.HasValue ? JsonSerializer.Deserialize<T>(value) : default;
+            try
+            {
+                var value = await _cache.StringGetAsync(key);
+                return value.HasValue ? JsonSerializer.Deserialize<T>(value) : default;
+            }
+            catch (RedisConnectionException)
+            {
+                // Redis no disponible, retornar valor por defecto
+                return default;
+            }
+            catch (Exception)
+            {
+                // Otros errores, retornar valor por defecto
+                return default;
+            }
         }
 
-        public async Task RemoveAsync(string key) => await _cache.KeyDeleteAsync(key);
+        public async Task RemoveAsync(string key)
+        {
+            try
+            {
+                await _cache.KeyDeleteAsync(key);
+            }
+            catch (RedisConnectionException)
+            {
+                // Redis no disponible, continuar
+            }
+            catch (Exception)
+            {
+                // Otros errores, continuar
+            }
+        }
     }
 }

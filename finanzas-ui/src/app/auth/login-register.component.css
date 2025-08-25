@@ -13,21 +13,22 @@
 	color: #222;
 	border-radius: 24px;
 	box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-	padding: 56px 48px;
+	padding: 48px 36px;
 	min-width: 340px;
-	max-width: 720px;
-	margin: 48px auto;
+	max-width: 480px;
+	width: 100%;
+	margin: 36px auto;
 	transition: box-shadow 0.3s;
-	min-height: 560px;
+	min-height: 490px;
 }
 
 .form {
 	display: flex;
 	flex-direction: column;
-	gap: 1.4rem;
+	gap: 1.2rem;
 	width: 100%;
-	max-width: 680px;
-	min-height: 420px;
+	max-width: 440px;
+	min-height: 360px;
 }
 
 mat-form-field {

@@ -46,7 +46,7 @@ namespace Repositories
             using (var connection = new System.Data.SqlClient.SqlConnection(connectionString))
             {
                 return await connection.QueryAsync("sp_ConsultarDeudas",
-                    new { PersonaId = usuarioId },
+                    new { UsuarioId = usuarioId },
                     commandType: System.Data.CommandType.StoredProcedure);
             }
         }
