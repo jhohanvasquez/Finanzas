@@ -82,7 +82,7 @@ Sistema de gestión de deudas y pagos
 - **POST /Pago/registrar**
   - Registrar pago a una deuda.
   - Body: `{ deudaId, montoPago, metodoPago }`
-
+   ```
 ### Ejemplo de respuesta de la API
 
 ### Listado de deudas (GET /Deuda/consultar/{usuarioId})
