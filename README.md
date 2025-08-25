@@ -194,3 +194,88 @@ Abre un issue en el [repositorio](https://github.com/jhohanvasquez/Finanzas).
 
 **Jhohan Vasquez**  
 📌 [Repositorio oficial](https://github.com/jhohanvasquez/Finanzas)
+
+Pregustas Teoricas
+------------------------
+
+# 🏗️ Arquitectura y Operaciones – Diseño Técnico
+
+Este documento describe cómo evolucionar de un **monolito** a **microservicios**, qué servicios en la nube usar, buenas prácticas de seguridad y consideraciones clave para un despliegue en producción.
+
+---
+
+## ⚡ Microservicios
+
+Si el sistema creciera y necesitara pasar de monolito a microservicios, dividiría los servicios de la siguiente manera:
+
+- **Servicio de Usuarios**  
+  Gestión de registro, autenticación y perfil de usuarios.
+- **Servicio de Deudas**  
+  Administración de deudas, consulta, registro y actualización.
+- **Servicio de Pagos**  
+  Procesamiento y registro de pagos asociados a deudas.
+- **Servicio de Notificaciones**  
+  Envío de correos, alertas y mensajes a usuarios.
+- **Servicio de Autenticación/Autorización**  
+  Centralización de la seguridad y emisión de tokens (JWT, OAuth2).
+- **Servicio de Cache**  
+  Gestión de datos temporales y optimización de consultas (Redis u otro motor en memoria).
+
+### 🔌 Consideraciones de comunicación
+- **Sincrónica**: REST/gRPC con *timeouts*, *retries* y *circuit breakers*.  
+- **Asíncrona**: uso de colas/eventos (RabbitMQ, Kafka, o Azure Service Bus) para desacoplar procesos.  
+- **API Gateway**: punto central para enrutamiento, autenticación, limitación de tráfico.  
+- **Observabilidad**: *logging estructurado*, *distributed tracing* y métricas centralizadas.  
+
+---
+
+## ☁️ Optimización en la nube (Azure)
+
+### 🔒 Autenticación segura
+- **Azure Active Directory (Azure AD) / Azure AD B2C**  
+  - Soporta OAuth2, OpenID Connect, SAML y federación con redes sociales.  
+  - Integración nativa con aplicaciones .NET y APIs.  
+  - Gestión centralizada de identidades y políticas de acceso.  
+
+### 🗄️ Base de datos
+- **Azure SQL Database**  
+  - Servicio PaaS, administrado y escalable.  
+  - Alta disponibilidad, backups automáticos y recuperación ante desastres.  
+  - Conexiones seguras y cifrado en reposo.  
+- **Alternativas**:  
+  - *Azure Cosmos DB* → NoSQL, distribución global, baja latencia.  
+  - *Azure Database for PostgreSQL/MySQL* según modelo de datos.  
+
+### ⚡ Cache y escalabilidad
+- **Azure Cache for Redis**  
+  - Cache distribuido en memoria.  
+  - Reduce carga en base de datos y mejora rendimiento.  
+  - Escalado automático, alta disponibilidad e integración con .NET (StackExchange.Redis).  
+
+### 🌐 Balanceo de carga
+- **Azure Application Gateway**  
+  - Balanceo a nivel de aplicación (HTTP/HTTPS).  
+  - Enrutamiento basado en URL, SSL offloading y protección WAF.  
+- **Alternativa**: Azure Load Balancer → tráfico TCP/UDP a nivel de red.  
+
+---
+
+## 🔐 Buenas prácticas de seguridad
+
+### Backend
+1. Validación y saneamiento de datos contra inyecciones y XSS.  
+2. Gestión segura de credenciales (hash con *salt*, nunca texto plano).  
+3. Autenticación y autorización robusta (JWT, OAuth2, roles/claims).  
+
+### Frontend
+1. Protección contra XSS (escape/sanitización de datos).  
+2. Uso obligatorio de HTTPS.  
+3. Tokens de acceso en cookies **HttpOnly** y seguras, nunca en `localStorage`.  
+
+### Despliegue en la nube
+1. Firewalls y redes privadas para restringir accesos.  
+2. Gestión de secretos en **Azure Key Vault** o **AWS Secrets Manager**.  
+3. Aplicación de parches y actualizaciones automáticas de OS y dependencias.  
+
+---
+
