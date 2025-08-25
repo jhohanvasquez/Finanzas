@@ -1,17 +1,7 @@
 <div class="center">
   <mat-card class="card">
     <mat-tab-group>
-      <mat-tab label="Login">
-        <form [formGroup]="loginForm" (ngSubmit)="doLogin()" class="form">
-          <mat-form-field appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput formControlName="email" placeholder="tu@email.com">
-            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Email inválido</mat-error>
-            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Obligatorio</mat-error>
-          </mat-form-field>
-          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Entrar</button>
-        </form>
-      </mat-tab>
+  <!-- Login tab eliminado -->
       <mat-tab label="Registro">
         <form [formGroup]="registerForm" (ngSubmit)="doRegister()" class="form">
           <mat-form-field appearance="fill">

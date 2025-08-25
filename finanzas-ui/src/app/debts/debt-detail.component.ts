@@ -43,29 +43,30 @@ export class DeudaDetailComponent implements OnInit {
   }
 
   cargar(id: number) {
-    this.api.getDeuda(id).subscribe(d => {
-      this.deuda.set(d);
-      this.form.patchValue({ descripcion: d.descripcion, montoTotal: d.montoTotal });
-    });
+      // No hay endpoint para consultar una sola deuda, se puede obtener de la lista si es necesario
+      // Aquí se podría hacer una consulta por usuario y filtrar por id
+      this.api.getDeudasPorUsuario(1).subscribe(deudas => {
+        const d = deudas.find(x => x.deudaId === id) || null;
+        this.deuda.set(d);
+        if (d) this.form.patchValue({ descripcion: d.descripcion, montoTotal: d.montoTotal });
+      });
   }
 
   guardarCambios() {
     const d = this.deuda();
     if (!d) return;
-    if (d.pagada) { alert('Una deuda pagada no puede ser modificada.'); return; }
+    if (d.estado === 'Pagada') { alert('Una deuda pagada no puede ser modificada.'); return; }
     if (this.form.invalid) return;
     const dto = { ...d, ...this.form.value };
-    this.api.editarDeuda(d.deudaId!, dto as any).subscribe(() => this.cargar(d.deudaId!));
+    // No hay endpoint para editar deuda, solo para registrar
+    // Se podría implementar si el backend lo soporta
   }
 
   eliminar() {
     const d = this.deuda();
     if (!d) return;
-    if (d.pagada) { alert('Una deuda pagada no puede ser eliminada.'); return; }
-    const ref = this.dialog.open(ConfirmDialogComponent, { data: { title: 'Eliminar deuda', message: '¿Seguro que deseas eliminar esta deuda?' } });
-    ref.afterClosed().subscribe(ok => {
-      if (ok) this.api.eliminarDeuda(d.deudaId!).subscribe(() => this.router.navigate(['/deudas']));
-    });
+    if (d.estado === 'Pagada') { alert('Una deuda pagada no puede ser eliminada.'); return; }
+    alert('Funcionalidad de eliminar deuda no implementada en el backend.');
   }
 
   registrarPago() {

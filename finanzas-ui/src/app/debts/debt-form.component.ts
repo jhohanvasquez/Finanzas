@@ -30,8 +30,9 @@ export class DeudaFormComponent {
   guardar() {
     if (this.form.invalid) return;
     const user = this.auth.user();
+    if (!user) return;
     const dto = {
-      usuarioId: 1, // Ajusta si tu backend requiere el ID real del usuario logeado
+      usuarioId: user.usuarioId,
       montoTotal: this.form.value.montoTotal!,
       descripcion: this.form.value.descripcion!,
     };

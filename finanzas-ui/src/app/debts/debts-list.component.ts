@@ -36,7 +36,7 @@ export class DebtsListComponent implements OnInit {
     this.loading.set(true);
     const user = this.auth.user();
     if (!user) return;
-    this.api.getDeudas().subscribe({
+    this.api.getDeudasPorUsuario(user.usuarioId).subscribe({
       next: (data) => { this.deudas.set(data); this.loading.set(false); },
       error: () => this.loading.set(false)
     });
@@ -46,8 +46,8 @@ export class DebtsListComponent implements OnInit {
     const f = this.filtro();
     return this.deudas().filter(d => {
       if (f === 'todas') return true;
-      if (f === 'pendientes') return !d.pagada;
-      return !!d.pagada;
+      if (f === 'pendientes') return d.estado === 'Pendiente';
+      return d.estado === 'Pagada';
     });
   });
 }

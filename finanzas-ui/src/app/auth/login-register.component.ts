@@ -1,3 +1,4 @@
+
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,7 +10,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../services/auth.service';
-
 @Component({
   standalone: true,
   selector: 'app-login-register',
@@ -24,28 +24,17 @@ export class LoginRegisterComponent {
 
   hide = true;
 
-  loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]]
-  });
-
   registerForm = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(2)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    passwordHash: ['', [Validators.required, Validators.minLength(6)]],
   });
-
-  doLogin() {
-    if (this.loginForm.invalid) return;
-    const { email } = this.loginForm.value;
-    this.auth.loginMock(email!);
-    this.router.navigate(['/deudas']);
-  }
 
   doRegister() {
     if (this.registerForm.invalid) return;
-    this.auth.register(this.registerForm.value as any).subscribe(() => {
-      // Auto-login
-      this.auth.loginMock(this.registerForm.value.email!);
+    this.auth.register(this.registerForm.value as any).subscribe((res: any) => {
+      // Guardar usuario en el servicio tras registro
+      this.auth.setUser({ usuarioId: res.usuarioId, nombre: res.nombre, email: res.email });
       this.router.navigate(['/deudas']);
     });
   }

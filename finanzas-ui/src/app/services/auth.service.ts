@@ -1,17 +1,19 @@
+
 import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
 export interface RegisterDto {
+  usuarioId: number;
   nombre: string;
   email: string;
-  password: string;
+  passwordHash: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly KEY = 'finanzas_user';
-  user = signal<{ nombre: string; email: string } | null>(null);
+  user = signal<{ usuarioId: number; nombre: string; email: string } | null>(null);
 
   constructor(private http: HttpClient) {
     const stored = localStorage.getItem(this.KEY);
@@ -20,15 +22,15 @@ export class AuthService {
 
   isLoggedIn() { return !!this.user(); }
 
-  loginMock(email: string) {
-    // Como la API de ejemplo no define endpoint de login, hacemos un login local guardando el email.
-    const u = { nombre: email.split('@')[0], email };
-    this.user.set(u);
-    localStorage.setItem(this.KEY, JSON.stringify(u));
+  register(dto: RegisterDto) {
+    // El endpoint espera usuarioId=0 para registro
+    const body = { ...dto, usuarioId: 0 };
+    return this.http.post(environment.apiBaseUrl + '/Usuario/registrar', body);
   }
 
-  register(dto: RegisterDto) {
-    return this.http.post(environment.apiBaseUrl + '/usuarios', dto);
+  setUser(user: { usuarioId: number; nombre: string; email: string }) {
+    this.user.set(user);
+    localStorage.setItem(this.KEY, JSON.stringify(user));
   }
 
   logout() {
