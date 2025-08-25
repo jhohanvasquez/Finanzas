@@ -21,3 +21,6 @@ logs/
 # Environment files
 .env
 .env.*
+
+# Ignorar caché de Angular
+.angular/cache
