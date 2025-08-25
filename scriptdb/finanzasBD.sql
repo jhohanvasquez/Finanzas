@@ -1,6 +1,6 @@
 USE [FinanzasDB]
 GO
-/****** Object:  Table [dbo].[Deuda]    Script Date: 24/08/2025 10:15:29 p. m. ******/
+/****** Object:  Table [dbo].[Deuda]    Script Date: 25/08/2025 7:21:34 a. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -18,7 +18,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Pago]    Script Date: 24/08/2025 10:15:29 p. m. ******/
+/****** Object:  Table [dbo].[Pago]    Script Date: 25/08/2025 7:21:34 a. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -35,7 +35,7 @@ PRIMARY KEY CLUSTERED
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Usuario]    Script Date: 24/08/2025 10:15:29 p. m. ******/
+/****** Object:  Table [dbo].[Usuario]    Script Date: 25/08/2025 7:21:34 a. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -49,42 +49,12 @@ CREATE TABLE [dbo].[Usuario](
 PRIMARY KEY CLUSTERED 
 (
 	[UsuarioId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-SET IDENTITY_INSERT [dbo].[Deuda] ON 
-GO
-INSERT [dbo].[Deuda] ([DeudaId], [UsuarioId], [MontoTotal], [Descripcion], [FechaCreacion], [Estado]) VALUES (1, 1, CAST(500000.00 AS Decimal(18, 2)), N'Préstamo personal', CAST(N'2025-08-23T00:50:58.557' AS DateTime), N'Parcial')
-GO
-INSERT [dbo].[Deuda] ([DeudaId], [UsuarioId], [MontoTotal], [Descripcion], [FechaCreacion], [Estado]) VALUES (2, 2, CAST(300000.00 AS Decimal(18, 2)), N'Compra de electrodoméstico', CAST(N'2025-08-23T00:50:58.557' AS DateTime), N'Pagada')
-GO
-SET IDENTITY_INSERT [dbo].[Deuda] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Pago] ON 
-GO
-INSERT [dbo].[Pago] ([PagoId], [DeudaId], [MontoPago], [FechaPago], [MetodoPago]) VALUES (1, 1, CAST(200000.00 AS Decimal(18, 2)), CAST(N'2025-08-23T00:50:58.563' AS DateTime), N'Transferencia')
-GO
-INSERT [dbo].[Pago] ([PagoId], [DeudaId], [MontoPago], [FechaPago], [MetodoPago]) VALUES (2, 2, CAST(300000.00 AS Decimal(18, 2)), CAST(N'2025-08-23T00:50:58.563' AS DateTime), N'Efectivo')
-GO
-SET IDENTITY_INSERT [dbo].[Pago] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Usuario] ON 
-GO
-INSERT [dbo].[Usuario] ([UsuarioId], [Nombre], [Email], [PasswordHash], [FechaRegistro]) VALUES (1, N'Carlos Pérez', N'carlos@email.com', N'hash123', CAST(N'2025-08-23T00:50:58.553' AS DateTime))
-GO
-INSERT [dbo].[Usuario] ([UsuarioId], [Nombre], [Email], [PasswordHash], [FechaRegistro]) VALUES (2, N'Ana Gómez', N'ana@email.com', N'hash456', CAST(N'2025-08-23T00:50:58.553' AS DateTime))
-GO
-INSERT [dbo].[Usuario] ([UsuarioId], [Nombre], [Email], [PasswordHash], [FechaRegistro]) VALUES (3, N'juan', N'juan@hotmail.com', N'321321', CAST(N'2025-08-23T17:21:54.257' AS DateTime))
-GO
-SET IDENTITY_INSERT [dbo].[Usuario] OFF
-GO
-SET ANSI_PADDING ON
-GO
-/****** Object:  Index [UQ__Usuario__A9D10534023D5A04]    Script Date: 24/08/2025 10:15:29 p. m. ******/
-ALTER TABLE [dbo].[Usuario] ADD UNIQUE NONCLUSTERED 
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
 (
 	[Email] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[Deuda] ADD  DEFAULT (getdate()) FOR [FechaCreacion]
 GO
@@ -100,7 +70,7 @@ GO
 ALTER TABLE [dbo].[Pago]  WITH CHECK ADD FOREIGN KEY([DeudaId])
 REFERENCES [dbo].[Deuda] ([DeudaId])
 GO
-/****** Object:  StoredProcedure [dbo].[sp_ConsultarDeudas]    Script Date: 24/08/2025 10:15:29 p. m. ******/
+/****** Object:  StoredProcedure [dbo].[sp_ConsultarDeudas]    Script Date: 25/08/2025 7:21:34 a. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -124,7 +94,7 @@ BEGIN
     GROUP BY u.Nombre, d.DeudaId, d.MontoTotal, d.Estado;
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_RegistrarDeuda]    Script Date: 24/08/2025 10:15:29 p. m. ******/
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarDeuda]    Script Date: 25/08/2025 7:21:34 a. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -147,7 +117,7 @@ BEGIN
     VALUES (@UsuarioId, @MontoTotal, @Descripcion, 'Pendiente');
 END;
 GO
-/****** Object:  StoredProcedure [dbo].[sp_RegistrarPago]    Script Date: 24/08/2025 10:15:29 p. m. ******/
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarPago]    Script Date: 25/08/2025 7:21:34 a. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -191,7 +161,7 @@ BEGIN
     END CATCH
 END
 GO
-/****** Object:  StoredProcedure [dbo].[sp_RegistrarUsuario]    Script Date: 24/08/2025 10:15:29 p. m. ******/
+/****** Object:  StoredProcedure [dbo].[sp_RegistrarUsuario]    Script Date: 25/08/2025 7:21:34 a. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -202,10 +172,21 @@ CREATE PROCEDURE [dbo].[sp_RegistrarUsuario]
     @PasswordHash NVARCHAR(256)
 AS
 BEGIN
-    INSERT INTO Usuario (Nombre, Email, PasswordHash)
-    VALUES (@Nombre, @Email, @PasswordHash);
+    SET NOCOUNT ON;
 
-    RETURN @@ROWCOUNT;
+    -- Verificar si el usuario ya existe por Email
+    IF EXISTS (SELECT 1 FROM Usuario WHERE Email = @Email)
+    BEGIN
+        -- Opcional: puedes devolver un código específico, por ejemplo -1
+        RETURN -1
+    END
+
+    -- Insertar el nuevo usuario
+    INSERT INTO Usuario (Nombre, Email, PasswordHash)
+    VALUES (@Nombre, @Email, @PasswordHash)
+
+    -- Opcional: devolver el número de filas afectadas
+    RETURN @@ROWCOUNT
 END
 
 GO
