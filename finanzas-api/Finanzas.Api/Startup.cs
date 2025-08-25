@@ -35,11 +35,8 @@ namespace Finanzas.Api
             // Registro de la conexión a la base de datos SQL
             services.Configure<ConnectionStrings>(Configuration.GetSection("ConnectionStrings"));
             // Registro de la conexión a Redis 
-            var options = ConfigurationOptions.Parse(Configuration.GetConnectionString("RedisConnection"));
-            options.AbortOnConnectFail = false;
-            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(options));
-
-
+            var redisConnectionString = Configuration.GetConnectionString("RedisConnection");
+            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnectionString));
 
             services.AddScoped<UsuarioRepository>();
             services.AddScoped<DeudaRepository>();

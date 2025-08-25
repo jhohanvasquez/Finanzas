@@ -1,61 +1,60 @@
-	display: grid;
-	gap: 28px;
-	max-width: 360px;
-	margin: 32px auto;
-	padding: 32px 24px;
-	background: #fff;
-	color: #222;
-	font-size: 1.08rem;
-	border-radius: 18px;
-	box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-}
+/* Modern monochrome Material-inspired styles for debt form */
+
+.form {
+  display: grid;
+  gap: 28px;
+  max-width: 360px;
+  margin: 32px auto;
+  padding: 32px 24px;
+  background: #fff;
+  color: #222;
+  font-size: 1.08rem;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
 }
 
 mat-form-field {
-	width: 100%;
-	color: #222;
-	font-size: 1.08rem;
-	font-family: inherit;
-}
+  width: 100%;
+  color: #222;
+  font-size: 1.08rem;
+  font-family: inherit;
 }
 
-input, button, mat-label, mat-error {
-	color: #222 !important;
-	background: #fff !important;
-	font-size: 1.08rem;
-	font-family: inherit;
-}
+input {
+  color: #222 !important;
+  background: #fff !important;
+  font-size: 1.08rem;
+  font-family: inherit;
 }
 
 input:focus {
-	outline: 2px solid #222;
-	border-radius: 10px;
-	box-shadow: 0 0 0 2px #2222;
-}
+  outline: 2px solid #222;
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px #2222;
 }
 
 button[mat-raised-button] {
-	margin-top: 16px;
-	font-weight: 700;
-	background: #222 !important;
-	color: #fff !important;
-	border-radius: 12px;
-	box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
-	font-size: 1.08rem;
-	padding: 12px 0;
-	letter-spacing: 0.03em;
+  margin-top: 16px;
+  font-weight: 700;
+  background: #222 !important;
+  color: #fff !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  font-size: 1.08rem;
+  padding: 12px 0;
+  letter-spacing: 0.03em;
 }
+
 button[mat-raised-button]:hover {
-	background: #000 !important;
-	box-shadow: 0 8px 24px rgba(0,0,0,0.22);
-	transform: translateY(-2px) scale(1.04);
+  background: #000 !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+  transform: translateY(-2px) scale(1.04);
 }
-}
+
 mat-error {
-	font-size: 1rem;
-	font-weight: 500;
-	letter-spacing: 0.01em;
-	color: #b71c1c !important;
-}
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #b71c1c !important;
 }

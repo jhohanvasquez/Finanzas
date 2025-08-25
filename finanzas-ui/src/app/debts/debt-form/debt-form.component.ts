@@ -37,6 +37,7 @@ export class DeudaFormComponent {
       montoTotal: this.form.value.montoTotal!,
       descripcion: this.form.value.descripcion!,
     };
+    debugger;
     this.api.crearDeuda(dto).subscribe(() => this.router.navigate(['/deudas']));
   }
 }

@@ -1,5 +1,3 @@
-
-
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -35,8 +33,10 @@ export class LoginRegisterComponent {
   const email = this.loginForm.value.email ?? '';
   const passwordHash = this.loginForm.value.passwordHash ?? '';
   this.auth.login(email, passwordHash).subscribe((res: any) => {
-      // Guardar usuario real retornado por el backend
-      this.auth.setUser({ usuarioId: res.usuarioId, nombre: res.nombre, email: res.email });
+      console.log('Respuesta login backend:', res); // <-- LOG para depuración
+      // Soporta ambos formatos: res.usuario o res directo
+      const usuario = res.usuario ?? res;
+      this.auth.setUser({ usuarioId: usuario.usuarioId, nombre: usuario.nombre, email: usuario.email });
       this.router.navigate(['/deudas']);
     });
   }
@@ -50,6 +50,7 @@ export class LoginRegisterComponent {
   doRegister() {
     if (this.registerForm.invalid) return;
     this.auth.register(this.registerForm.value as any).subscribe((res: any) => {
+      console.log('Respuesta registro backend:', res); // <-- LOG para depuración
       // Guardar usuario en el servicio tras registro
       this.auth.setUser({ usuarioId: res.usuarioId, nombre: res.nombre, email: res.email });
       this.router.navigate(['/deudas']);

@@ -36,6 +36,7 @@ export class AuthService {
   }
 
   setUser(user: { usuarioId: number; nombre: string; email: string }) {
+    debugger;
     this.user.set(user);
     localStorage.setItem(this.KEY, JSON.stringify(user));
   }

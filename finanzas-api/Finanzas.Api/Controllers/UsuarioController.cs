@@ -26,19 +26,16 @@ namespace Finanzas.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] Usuario usuario)
         {
-            // Obtener el usuario por email
             var usuarioDb = await _repo.ObtenerPorEmailAsync(usuario.Email);
             if (usuarioDb == null)
                 return Unauthorized(new { message = "Usuario o contraseña incorrectos" });
 
-            // Hashear la contraseña recibida para comparar
             using var sha256 = SHA256.Create();
             var passwordHash = System.Convert.ToBase64String(sha256.ComputeHash(Encoding.UTF8.GetBytes(usuario.PasswordHash)));
 
             if (usuarioDb.PasswordHash != passwordHash)
                 return Unauthorized(new { message = "Usuario o contraseña incorrectos" });
 
-            // Puedes devolver datos del usuario o un token si implementas JWT
             return Ok(new { message = "Login exitoso", usuario = usuarioDb });
         }
 
