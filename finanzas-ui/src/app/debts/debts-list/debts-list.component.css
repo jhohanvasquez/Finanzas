@@ -118,6 +118,26 @@ tr.mat-row:hover {
   min-height: 360px;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.actions-row {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.filters-row {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
 .filters {
   display: flex;
   gap: 18px;
@@ -171,7 +191,7 @@ button, button[mat-raised-button], button[mat-button] {
   font-size: 1.08rem;
   cursor: pointer;
   transition: background 0.2s;
-  width: 100%;
+  width: auto;
 }
 
 button:hover, button[mat-raised-button]:hover, button[mat-button]:hover {

@@ -4,7 +4,7 @@
       <h2>Deudas</h2>
       <p>Listado general de deudas. Filtra por estado o crea una nueva.</p>
     </div>
-    <div class="actions">
+    <div class="actions actions-row">
       <a mat-raised-button color="primary" routerLink="/deudas/nueva">
         <mat-icon>add</mat-icon> Nueva deuda
       </a>
@@ -14,7 +14,7 @@
     </div>
   </div>
 
-  <div class="filters">
+  <div class="filters filters-row">
     <mat-select [(value)]="filtro">
       <mat-option value="todas">Todas</mat-option>
       <mat-option value="pendientes">Pendientes</mat-option>

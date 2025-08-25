@@ -46,9 +46,13 @@ export class DeudaDetailComponent implements OnInit {
       // No hay endpoint para consultar una sola deuda, se puede obtener de la lista si es necesario
       // Aquí se podría hacer una consulta por usuario y filtrar por id
       this.api.getDeudasPorUsuario(1).subscribe(deudas => {
-        const d = deudas.find(x => x.deudaId === id) || null;
-        this.deuda.set(d);
-        if (d) this.form.patchValue({ descripcion: d.descripcion, montoTotal: d.montoTotal });
+        // Si la respuesta viene en formato transformado, buscar por id
+        let deuda = null;
+        if (Array.isArray(deudas)) {
+          deuda = deudas.find(x => x.deudaId === id) || null;
+        }
+        this.deuda.set(deuda);
+        if (deuda) this.form.patchValue({ descripcion: deuda.descripcion, montoTotal: deuda.montoTotal });
       });
   }
 
