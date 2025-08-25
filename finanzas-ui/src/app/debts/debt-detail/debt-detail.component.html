@@ -2,25 +2,25 @@
   <mat-card>
     <div class="header">
       <h2>Detalle de deuda #{{d.deudaId}}</h2>
-      <mat-chip [ngClass]="d.pagada ? 'chip-paid' : 'chip-pending'">{{ d.pagada ? 'Pagada' : 'Pendiente' }}</mat-chip>
+      <mat-chip [ngClass]="d.estado === 'Pagada' ? 'chip-paid' : 'chip-pending'">{{ d.estado === 'Pagada' ? 'Pagada' : 'Pendiente' }}</mat-chip>
     </div>
 
     <form [formGroup]="form" class="grid">
       <mat-form-field appearance="fill">
         <mat-label>Descripción</mat-label>
-        <input matInput formControlName="descripcion" [readonly]="d.pagada">
+        <input matInput formControlName="descripcion" [readonly]="d.estado === 'Pagada'">
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Monto total</mat-label>
-        <input matInput type="number" formControlName="montoTotal" step="0.01" [readonly]="d.pagada">
+        <input matInput type="number" formControlName="montoTotal" step="0.01" [readonly]="d.estado === 'Pagada'">
         <mat-error *ngIf="form.get('montoTotal')?.hasError('min')">Debe ser mayor que 0</mat-error>
       </mat-form-field>
     </form>
 
     <div class="actions">
-      <button mat-raised-button color="primary" (click)="guardarCambios()" [disabled]="d.pagada || form.invalid">Guardar</button>
-      <button mat-stroked-button color="warn" (click)="eliminar()" [disabled]="d.pagada">Eliminar</button>
+      <button mat-raised-button color="primary" (click)="guardarCambios()" [disabled]="d.estado === 'Pagada' || form.invalid">Guardar</button>
+      <button mat-stroked-button color="warn" (click)="eliminar()" [disabled]="d.estado === 'Pagada'">Eliminar</button>
       <a mat-button routerLink="/deudas">Volver</a>
     </div>
   </mat-card>

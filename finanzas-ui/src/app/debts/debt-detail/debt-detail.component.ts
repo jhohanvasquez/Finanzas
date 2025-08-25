@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { ApiService, Deuda } from '../services/api.service';
-import { ConfirmDialogComponent } from '../shared/confirm-dialog.component';
+import { ApiService, Deuda } from '../../services/api.service';
+import { ConfirmDialogComponent } from '../../shared/confirm-dialog.component';
 
 @Component({
   standalone: true,

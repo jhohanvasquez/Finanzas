@@ -46,8 +46,8 @@
       <ng-container matColumnDef="estado">
         <th mat-header-cell *matHeaderCellDef>Estado</th>
         <td mat-cell *matCellDef="let d">
-          <mat-chip [ngClass]="d.pagada ? 'chip-paid' : 'chip-pending'">
-            {{ d.pagada ? 'Pagada' : 'Pendiente' }}
+          <mat-chip [ngClass]="d.estado === 'Pagada' ? 'chip-paid' : 'chip-pending'">
+            {{ d.estado === 'Pagada' ? 'Pagada' : 'Pendiente' }}
           </mat-chip>
         </td>
       </ng-container>

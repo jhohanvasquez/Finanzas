@@ -8,8 +8,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ApiService, Deuda } from '../services/api.service';
-import { AuthService } from '../services/auth.service';
+import { ApiService, Deuda } from '../../services/api.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   standalone: true,

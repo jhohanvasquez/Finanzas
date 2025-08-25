@@ -25,20 +25,17 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   // Deudas
-  getDeudasPorUsuario(usuarioId: number) {
+  getDeudasPorUsuario(usuarioId: number): import('rxjs').Observable<Deuda[]> {
     return this.http.get<Deuda[]>(`${this.base}/Deuda/consultar/${usuarioId}`);
   }
 
-  crearDeuda(dto: Deuda) {
-    // El endpoint espera deudaId=0 para registro
-    const body = { ...dto, deudaId: 0, estado: 'Pendiente' };
+  crearDeuda(dto: Omit<Deuda, 'deudaId' | 'estado'>): import('rxjs').Observable<Deuda> {
+    const body: Deuda = { ...dto, deudaId: 0, estado: 'Pendiente' };
     return this.http.post<Deuda>(`${this.base}/Deuda/registrar`, body);
   }
 
-  // Pagos
-  registrarPago(dto: Pago) {
-    // El endpoint espera pagoId=0 para registro
-    const body = { ...dto, pagoId: 0 };
+  registrarPago(dto: Omit<Pago, 'pagoId'>): import('rxjs').Observable<Pago> {
+    const body: Pago = { ...dto, pagoId: 0 };
     return this.http.post<Pago>(`${this.base}/Pago/registrar`, body);
   }
 }
