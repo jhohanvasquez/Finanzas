@@ -154,9 +154,7 @@ flowchart TD
   <img src="https://github.com/user-attachments/assets/e8bf554f-6ca5-418b-a7b6-d8f7b9bc8343" width="80%"/>
   <img src="https://github.com/user-attachments/assets/66b53ba0-17cb-41a3-a232-caa51c35ba68" width="80%"/>
   <img src="https://github.com/user-attachments/assets/0be627be-5500-4dcf-890c-4ff9f5f48b3e" width="80%"/>
-  <img src="https://github.com/user-attachments/assets/b09f97d4-04c1-41ae-927e-906881daf8ed" width="80%"/>
   <img src="https://github.com/user-attachments/assets/3f462845-68e8-4f4b-9a0c-3433a79783f8" width="80%"/>
-  <img src="https://github.com/user-attachments/assets/f54070ec-8184-493b-a9ba-23503693f68d" width="80%"/>
   <img src="https://github.com/user-attachments/assets/7e07968e-0bd9-4fb2-9101-6d05f63ce233" width="80%"/>
 </p>
 
