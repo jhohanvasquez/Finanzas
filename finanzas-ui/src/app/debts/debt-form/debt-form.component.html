@@ -14,7 +14,9 @@
       <mat-error *ngIf="form.get('descripcion')?.invalid">Mínimo 3 caracteres</mat-error>
     </mat-form-field>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
-    <a mat-button routerLink="/deudas">Cancelar</a>
+    <div class="form-actions" style="display: flex; gap: 18px;">
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Guardar</button>
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">Cancelar</button>
+    </div>
   </form>
 </mat-card>

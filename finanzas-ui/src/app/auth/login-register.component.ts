@@ -48,7 +48,10 @@ export class LoginRegisterComponent {
   });
 
   doRegister() {
-    if (this.registerForm.invalid) return;
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched(); // Fuerza mostrar errores
+      return;
+    }
     this.auth.register(this.registerForm.value as any).subscribe((res: any) => {
       console.log('Respuesta registro backend:', res); // <-- LOG para depuración
       // Guardar usuario en el servicio tras registro

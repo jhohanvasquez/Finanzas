@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ApiService, Deuda } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   standalone: true,
@@ -50,4 +51,14 @@ export class DebtsListComponent implements OnInit {
       return d.estado === 'Pagada';
     });
   });
+
+  exportarDeudas() {
+    const deudas = this.deudasFiltradas();
+    const csv = [
+      ['ID', 'Descripción', 'Monto Total', 'Estado'],
+      ...deudas.map(d => [d.deudaId, d.descripcion, d.montoTotal, d.estado])
+    ].map(row => row.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    saveAs(blob, 'deudas.csv');
+  }
 }

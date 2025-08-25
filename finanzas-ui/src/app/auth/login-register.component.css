@@ -13,67 +13,99 @@
 	color: #222;
 	border-radius: 24px;
 	box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-	padding: 40px 32px;
+	padding: 56px 48px;
 	min-width: 340px;
-	max-width: 380px;
-	margin: auto;
+	max-width: 720px;
+	margin: 48px auto;
 	transition: box-shadow 0.3s;
+	min-height: 560px;
 }
 
 .form {
 	display: flex;
 	flex-direction: column;
-	gap: 1.2rem;
+	gap: 1.4rem;
 	width: 100%;
-	max-width: 360px;
+	max-width: 680px;
+	min-height: 420px;
 }
 
 mat-form-field {
 	width: 100%;
+	background: #fff !important;
+	border-radius: 10px;
+}
+
+.mat-form-field-flex {
+	background: #fff !important;
+	border-radius: 10px;
 }
 
 input {
-	background: #fff;
+	background: #fff !important;
 	color: #222;
-	border: 1px solid #222;
+	border: 1.5px solid #222;
 	border-radius: 10px;
-	padding: 0.7rem 1rem;
-	font-size: 1rem;
+	padding: 1.1rem 1.4rem;
+	font-size: 1.08rem;
 	outline: none;
 	transition: border-color 0.2s;
 	font-family: inherit;
+	width: 100%;
+	box-sizing: border-box;
 }
 
 input:focus {
-	border-color: #000;
-	outline: 2px solid #222;
+	border-color: #3f51b5;
+	background: #f9f9f9;
 }
 
-button[mat-raised-button] {
-	margin-top: 16px;
-	font-weight: 700;
-	background: #222 !important;
+input::placeholder {
+	color: #888;
+	font-size: 1rem;
+	opacity: 1;
+}
+
+button, button[mat-raised-button], button[mat-button] {
+	background: #3f51b5 !important;
 	color: #fff !important;
-	border-radius: 12px;
-	box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+	border: none;
+	border-radius: 6px;
+	padding: 1.1rem 1.4rem;
 	font-size: 1.08rem;
-	padding: 12px 0;
-	letter-spacing: 0.03em;
+	cursor: pointer;
+	transition: background 0.2s;
 	width: 100%;
-	max-width: 360px;
 }
 
-button[mat-raised-button]:hover {
-	background: #000 !important;
-	box-shadow: 0 8px 24px rgba(0,0,0,0.22);
-	transform: translateY(-2px) scale(1.04);
+button:hover, button[mat-raised-button]:hover, button[mat-button]:hover {
+	background: #222 !important;
 }
 
 mat-error {
-	font-size: 1rem;
-	font-weight: 500;
-	letter-spacing: 0.01em;
-	color: #b71c1c !important;
+	color: #d32f2f;
+	font-size: 0.95rem;
 	margin-top: 0.3rem;
+}
+
+.tabs {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 1.5rem;
+}
+
+.tab {
+	background: none;
+	border: none;
+	color: #3f51b5;
+	font-size: 1.1rem;
+	padding: 0.7rem 1.5rem;
+	cursor: pointer;
+	border-bottom: 2px solid transparent;
+	transition: border-color 0.2s, color 0.2s;
+}
+
+.tab.active {
+	border-bottom: 2px solid #3f51b5;
+	color: #3f51b5;
 }

@@ -40,4 +40,8 @@ export class DeudaFormComponent {
     debugger;
     this.api.crearDeuda(dto).subscribe(() => this.router.navigate(['/deudas']));
   }
+
+  cancelar() {
+    this.router.navigate(['/deudas']);
+  }
 }
