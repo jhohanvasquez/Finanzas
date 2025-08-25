@@ -206,6 +206,8 @@ Jhohan Vasquez
 
 Para dudas o soporte, abre un issue en el repositorio.
 
+<img width="899" height="449" alt="image" src="https://github.com/user-attachments/assets/e8bf554f-6ca5-418b-a7b6-d8f7b9bc8343" />
+
 <img width="934" height="467" alt="image" src="https://github.com/user-attachments/assets/66b53ba0-17cb-41a3-a232-caa51c35ba68" />
 
 <img width="930" height="475" alt="image" src="https://github.com/user-attachments/assets/0be627be-5500-4dcf-890c-4ff9f5f48b3e" />
