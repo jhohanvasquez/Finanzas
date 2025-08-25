@@ -7,6 +7,7 @@ _Sistema de gestión de deudas y pagos — Frontend en **Angular 17** + Backend 
   <img src="https://img.shields.io/badge/.NET-9.0-purple?logo=dotnet" alt=".NET"/>
   <img src="https://img.shields.io/badge/Node.js-18-green?logo=node.js" alt="Node.js"/>
   <img src="https://img.shields.io/badge/Database-SQL%20Server-blue?logo=microsoftsqlserver" alt="SQL Server"/>
+  <img src="https://img.shields.io/badge/Cache-Redis-red?logo=redis" alt="Redis"/>
 </p>
 
 ---
@@ -17,6 +18,7 @@ _Sistema de gestión de deudas y pagos — Frontend en **Angular 17** + Backend 
 - .NET >= 9.0  
 - Angular >= 17  
 - SQL Server  
+- Redis (para cacheo de consultas y sesiones)  
 
 ---
 
@@ -25,7 +27,7 @@ _Sistema de gestión de deudas y pagos — Frontend en **Angular 17** + Backend 
 ### 🔹 Backend (API)
 1. Clona el repositorio del backend.  
 2. Ejecuta el script de base de datos en la carpeta `scriptdb`.  
-3. Instala los paquetes NuGet necesarios (`Microsoft.AspNetCore.Cors`, etc).  
+3. Instala los paquetes NuGet necesarios (`Microsoft.AspNetCore.Cors`, `StackExchange.Redis`, etc).  
 4. Configura la cadena de conexión en `appsettings.json`.  
 5. Ejecuta las migraciones:  
    ```bash
@@ -55,6 +57,7 @@ _Sistema de gestión de deudas y pagos — Frontend en **Angular 17** + Backend 
 
 - **Frontend:** Angular standalone, Angular Material, Signals, TypeScript.  
 - **Backend:** .NET 9, Entity Framework, SQL Server, Dapper.  
+- **Cache:** Redis para cacheo de consultas y persistencia temporal.  
 - **Autenticación:** Login y registro, sesión persistida en LocalStorage.  
 - **Gestión de deudas:** CRUD de deudas, registrar pagos, exportar CSV.  
 - **Validaciones:** Formularios reactivos, mensajes de error dinámicos.  
@@ -69,6 +72,7 @@ _Sistema de gestión de deudas y pagos — Frontend en **Angular 17** + Backend 
 ✔ Listado filtrable por estado  
 ✔ Registro de pagos asociados  
 ✔ Exportación de deudas a CSV  
+✔ Cache de consultas con Redis  
 ✔ Validaciones en formularios  
 
 ---
@@ -113,9 +117,11 @@ flowchart LR
     A[👤 Usuario] --> B[🌐 Frontend Angular]
     B -->|HTTP REST| C[⚙️ Backend .NET API]
     C --> D[(💾 SQL Server DB)]
+    C --> E[(🧰 Redis Cache)]
 
     B -.->|LocalStorage| B
     C -.->|Entity Framework & Dapper| D
+    C -.->|Consultas rápidas & sesiones| E
 ```
 
 ---
@@ -126,13 +132,18 @@ flowchart LR
 flowchart TD
     A[👤 Usuario] --> B[📝 Registro/Login]
     B -->|Autenticación exitosa| C[📋 Listado de Deudas]
-    C --> D[➕ Crear/Editar Deuda]
-    C --> E[👁️ Ver Detalle de Deuda]
-    E --> F[💵 Registrar Pago]
-    C --> G[📤 Exportar CSV]
+
+    C -->|Consulta cacheada| E[(🧰 Redis)]
+    E -->|Cache hit| C
+    E -->|Cache miss| D[(💾 SQL Server)]
+
+    C --> F[➕ Crear/Editar Deuda]
+    C --> G[👁️ Ver Detalle de Deuda]
+    G --> H[💵 Registrar Pago]
+    C --> I[📤 Exportar CSV]
 
     F --> C
-    D --> C
+    H --> C
 ```
 
 ---
@@ -158,6 +169,13 @@ Edita `appsettings.json` y corre:
 ```bash
 dotnet ef database update
 ```
+
+**¿Cómo configuro Redis?**  
+- Instala Redis localmente o en un contenedor Docker:  
+  ```bash
+  docker run -d --name redis -p 6379:6379 redis
+  ```  
+- Configura la conexión en `appsettings.json` bajo `"Redis:ConnectionString"`.  
 
 **¿Cómo soluciono problemas de CORS?**  
 Revisa la configuración en `Program.cs` o `Startup.cs`.  
