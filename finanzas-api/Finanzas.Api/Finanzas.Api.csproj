@@ -1,24 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Finanzas.Api</RootNamespace>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<RootNamespace>Finanzas.Api</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="Service\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Controllers\" />
+		<Folder Include="Service\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Dapper" Version="2.1.66" />
-    <PackageReference Include="StackExchange.Redis" Version="2.9.11" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Dapper" Version="2.1.66" />
+		<PackageReference Include="StackExchange.Redis" Version="2.9.11" />
+		<PackageReference Include="Microsoft.Extensions.Options" Version="9.0.8" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Finanzas.Infraestructure\Finanzas.Infraestructure.csproj" />
-    <ProjectReference Include="..\Finanzas.ServiceCore\Finanzas.ServiceCore.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Finanzas.Infraestructure\Finanzas.Infraestructure.csproj" />
+		<ProjectReference Include="..\Finanzas.ServiceCore\Finanzas.ServiceCore.csproj" />
+	</ItemGroup>
 
 
 </Project>
