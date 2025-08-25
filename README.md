@@ -135,7 +135,7 @@ Puedes agregar una imagen de la UI en el README:
 - **TypeScript**: Tipado estático y desarrollo seguro en el frontend.
 - **RxJS & Signals**: Gestión reactiva de estado y datos en la UI.
 - **.NET 9.0**: Backend API RESTful, alto rendimiento y escalabilidad.
-- **Entity Framework Core**: ORM para acceso y gestión de datos en SQL Server.
+- **Dapper**: acceso y gestión de datos en SQL Server.
 - **SQL Server**: Base de datos relacional para persistencia de usuarios, deudas y pagos.
 - **file-saver**: Exportación de datos a CSV desde la UI.
 - **LocalStorage**: Persistencia de sesión y estado de usuario en el navegador.
