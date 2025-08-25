@@ -195,7 +195,7 @@ Abre un issue en el [repositorio](https://github.com/jhohanvasquez/Finanzas).
 **Jhohan Vasquez**  
 📌 [Repositorio oficial](https://github.com/jhohanvasquez/Finanzas)
 
-Pregustas Teoricas
+Preguntas Teoricas
 ------------------------
 
 # 🏗️ Arquitectura y Operaciones – Diseño Técnico
