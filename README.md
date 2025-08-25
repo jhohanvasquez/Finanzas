@@ -38,7 +38,7 @@ Sistema de gestión de deudas y pagos
    npm start
    ```
 4. Accede a la UI en `http://localhost:4200`
-
+```bash
 ## Detalles técnicos
 
 - **Frontend:** Angular standalone, Material Design, signals, TypeScript.
