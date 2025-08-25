@@ -8,15 +8,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ApiService, Deuda } from '../../services/api.service';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   standalone: true,
   selector: 'app-debt-detail',
   templateUrl: './debt-detail.component.html',
   styleUrls: ['./debt-detail.component.css'],
-  imports: [CommonModule, RouterLink, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatChipsModule, MatDialogModule]
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatChipsModule, MatDialogModule, MatProgressSpinnerModule]
 })
 export class DeudaDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
@@ -24,6 +26,7 @@ export class DeudaDetailComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private dialog = inject(MatDialog);
+  private auth = inject(AuthService);
 
   deuda = signal<Deuda | null>(null);
 
@@ -44,45 +47,48 @@ export class DeudaDetailComponent implements OnInit {
 
   cargar(id: number) {
       // Consulta todas las deudas y busca la que coincide con el id
-      console.log('Iniciando carga de detalle para id:', id);
-      this.api.getDeudasPorUsuario(1).subscribe({
+      const user = this.auth.user();
+      if (!user) {
+        console.warn('No hay usuario autenticado.');
+        this.deuda.set(null);
+        return;
+      }
+      console.log('Iniciando carga de detalle para id:', id, 'usuarioId:', user.usuarioId);
+      this.api.getDeudasPorUsuario(user.usuarioId).subscribe({
         next: (deudas) => {
-          alert('Respuesta de la API en detalle: ' + JSON.stringify(deudas));
           console.log('Respuesta de la API en detalle:', JSON.stringify(deudas));
           let deuda: Deuda | null = null;
           // Si la respuesta es un solo objeto, úsalo directamente
           if (deudas && typeof deudas === 'object' && !Array.isArray(deudas) && ('DeudaId' in deudas || 'deudaId' in deudas)) {
             const obj = deudas as any;
-            alert('Deuda encontrada como objeto: ' + JSON.stringify(obj));
             console.log('Deuda encontrada como objeto:', JSON.stringify(obj));
             deuda = {
               deudaId: Number(obj.DeudaId ?? obj.deudaId),
-              usuarioId: obj.usuarioId ?? 1,
+              usuarioId: obj.usuarioId ?? user.usuarioId,
               descripcion: String(obj.Nombre ?? obj.descripcion ?? ''),
               montoTotal: Number(obj.MontoTotal ?? obj.montoTotal ?? 0),
               estado: String(obj.Estado ?? obj.estado ?? '')
             };
           } else if (Array.isArray(deudas)) {
             // Si es array de objetos tipo {DeudaId, ...}
+            console.log('Array recibido en detalle:', JSON.stringify(deudas));
             const encontrada = (deudas as any[]).find(x => Number(x.deudaId ?? x.DeudaId) === id);
             console.log('Deuda encontrada en array:', JSON.stringify(encontrada));
             if (encontrada) {
               deuda = {
                 deudaId: Number(encontrada.DeudaId ?? encontrada.deudaId),
-                usuarioId: encontrada.usuarioId ?? 1,
+                usuarioId: encontrada.usuarioId ?? user.usuarioId,
                 descripcion: String(encontrada.Nombre ?? encontrada.descripcion ?? ''),
                 montoTotal: Number(encontrada.MontoTotal ?? encontrada.montoTotal ?? 0),
                 estado: String(encontrada.Estado ?? encontrada.estado ?? '')
               };
             }
           }
-          alert('Deuda final para mostrar: ' + JSON.stringify(deuda));
           console.log('Deuda final para mostrar:', JSON.stringify(deuda));
           this.deuda.set(deuda);
           if (deuda) this.form.patchValue({ descripcion: deuda.descripcion, montoTotal: deuda.montoTotal });
         },
         error: (err) => {
-          alert('Error al consultar la deuda: ' + JSON.stringify(err));
           console.error('Error al consultar la deuda:', err);
         }
       });
