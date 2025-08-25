@@ -9,6 +9,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ApiService, Deuda } from '../../services/api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PagoDialogComponent } from '../../shared/pago-dialog.component';
 import { AuthService } from '../../services/auth.service';
 import { saveAs } from 'file-saver';
 
@@ -22,12 +24,29 @@ import { saveAs } from 'file-saver';
 export class DebtsListComponent implements OnInit {
   private api = inject(ApiService);
   private auth = inject(AuthService);
+  private dialog = inject(MatDialog);
 
   loading = signal(true);
   filtro = signal<'todas' | 'pendientes' | 'pagadas'>('todas');
   deudas = signal<Deuda[]>([]);
 
   displayedColumns = ['id','descripcion','monto','estado','acciones'];
+
+  registrarPago(id: number) {
+    const dialogRef = this.dialog.open(PagoDialogComponent, {
+      data: { deudaId: id },
+      width: '400px'
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.montoPago && result.metodoPago) {
+        this.api.registrarPago({
+          deudaId: id,
+          montoPago: result.montoPago,
+          metodoPago: result.metodoPago
+        }).subscribe(() => this.cargar());
+      }
+    });
+  }
 
   ngOnInit() {
     this.cargar();
