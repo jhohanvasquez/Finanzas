@@ -16,16 +16,19 @@ namespace Finanzas.ServiceCore.Service
         {
             this._usuarioRepository = usuarioRepository;
         }
-        public Task<int> RegistrarPago(Pago pago)
+        public Task<int> RegistrarUsuario(Usuario usuario)
         {
-            var pagoInfraestructura = new Pago
-            {
-                PagoId = pago.PagoId,
-                DeudaId = pago.DeudaId,
-                MontoPago = pago.MontoPago,
-                MetodoPago = pago.MetodoPago
-            };
-            return _usuarioRepository.RegistrarPago(pagoInfraestructura);
+            return _usuarioRepository.RegistrarUsuario(usuario);
+        }
+
+        public Task<Usuario> LoginAsync(string email, string password)
+        {
+            return _usuarioRepository.LoginAsync(email, password);
+        }
+
+        public Task<Usuario> ObtenerPorEmailAsync(string email)
+        {
+            return _usuarioRepository.ObtenerPorEmailAsync(email);
         }
     }
 }

@@ -9,6 +9,9 @@ namespace Finanzas.ServiceCore.Interfaces
 {
     public interface IUsuarioService
     {
-        Task<int> RegistrarPago(Pago pago);
+        Task<int> RegistrarUsuario(Usuario usuario);
+        Task<Usuario> LoginAsync(string email, string password);
+        Task<Usuario> ObtenerPorEmailAsync(string email);
+
     }
 }

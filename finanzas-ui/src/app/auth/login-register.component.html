@@ -1,7 +1,25 @@
 <div class="center">
   <mat-card class="card">
     <mat-tab-group>
-  <!-- Login tab eliminado -->
+      <mat-tab label="Ingresar">
+        <form [formGroup]="loginForm" (ngSubmit)="doLogin()" class="form">
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Email inválido</mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Obligatorio</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="passwordHash">
+            <button mat-icon-button matSuffix type="button" (click)="hide = !hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="loginForm.get('passwordHash')?.invalid">Mínimo 6 caracteres</mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+        </form>
+      </mat-tab>
       <mat-tab label="Registro">
         <form [formGroup]="registerForm" (ngSubmit)="doRegister()" class="form">
           <mat-form-field appearance="fill">

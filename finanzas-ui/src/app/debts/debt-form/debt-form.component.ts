@@ -30,6 +30,7 @@ export class DeudaFormComponent {
   guardar() {
     if (this.form.invalid) return;
     const user = this.auth.user();
+    console.log('Usuario actual:', user);
     if (!user) return;
     const dto = {
       usuarioId: user.usuarioId,

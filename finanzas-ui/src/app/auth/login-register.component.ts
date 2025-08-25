@@ -1,4 +1,5 @@
 
+
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,6 +24,22 @@ export class LoginRegisterComponent {
   private router = inject(Router);
 
   hide = true;
+
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    passwordHash: ['', [Validators.required, Validators.minLength(6)]],
+  });
+
+  doLogin() {
+    if (this.loginForm.invalid) return;
+  const email = this.loginForm.value.email ?? '';
+  const passwordHash = this.loginForm.value.passwordHash ?? '';
+  this.auth.login(email, passwordHash).subscribe((res: any) => {
+      // Guardar usuario real retornado por el backend
+      this.auth.setUser({ usuarioId: res.usuarioId, nombre: res.nombre, email: res.email });
+      this.router.navigate(['/deudas']);
+    });
+  }
 
   registerForm = this.fb.group({
     nombre: ['', [Validators.required, Validators.minLength(2)]],

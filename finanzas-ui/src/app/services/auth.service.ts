@@ -1,5 +1,7 @@
 
-import { Injectable, signal } from '@angular/core';
+import { ApiService } from './api.service';
+
+import { Injectable, signal, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 
@@ -12,6 +14,11 @@ export interface RegisterDto {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  private api = inject(ApiService);
+
+  login(email: string, passwordHash: string) {
+    return this.api.login(email, passwordHash);
+  }
   private readonly KEY = 'finanzas_user';
   user = signal<{ usuarioId: number; nombre: string; email: string } | null>(null);
 

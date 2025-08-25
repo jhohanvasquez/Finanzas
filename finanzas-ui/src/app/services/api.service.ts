@@ -20,9 +20,14 @@ export interface Pago {
 
 @Injectable({ providedIn: 'root' })
 export class ApiService {
+  // Login
+  login(email: string, passwordHash: string) {
+    return this.http.post<any>(`${this.base}/Usuario/login`, { email, passwordHash });
+  }
   private base = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
+
 
   // Deudas
   getDeudasPorUsuario(usuarioId: number): import('rxjs').Observable<Deuda[]> {

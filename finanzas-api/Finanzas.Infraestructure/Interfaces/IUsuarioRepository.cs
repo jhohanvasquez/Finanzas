@@ -10,5 +10,8 @@ namespace Finanzas.Infraestructure.Interfaces
     public interface IUsuarioRepository
     {
         Task<int> RegistrarUsuario(Usuario usuario);
+        Task<Usuario> ObtenerPorEmailAsync(string email);
+        Task<Usuario> LoginAsync(string email, string password);
+
     }
 }
