@@ -12,21 +12,20 @@ Sistema de gestión de deudas y pagos
 
 ### Backend (API)
 1. Clona el repositorio del backend.
-2. Instala los paquetes NuGet necesarios:
+2. Ejecuta el scrip de base de datos se encuentra en la carpeta de scriptdb.
+3. Instala los paquetes NuGet necesarios:
    - Microsoft.AspNetCore.Cors
-   - Microsoft.EntityFrameworkCore
-   - Microsoft.EntityFrameworkCore.SqlServer
    - Otros según tu archivo .csproj
-3. Configura la cadena de conexión en `appsettings.json`.
-4. Ejecuta las migraciones de la base de datos:
+4. Configura la cadena de conexión en `appsettings.json`.
+5. Ejecuta las migraciones de la base de datos:
    ```bash
    dotnet ef database update
    ```
-5. Inicia la API:
+6. Inicia la API:
    ```bash
    dotnet run
    ```
-6. La API estará disponible en `http://localhost:5000/api`.
+7. La API estará disponible en `http://localhost:5000/api`.
 
 ### Frontend (UI)
 1. Clona este repositorio (UI).
