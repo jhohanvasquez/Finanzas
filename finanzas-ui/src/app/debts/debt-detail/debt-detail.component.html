@@ -1,30 +1,26 @@
-<ng-container *ngIf="deuda() as d">
+<ng-container *ngIf="deuda(); else noDeuda">
   <mat-card>
     <div class="header">
-      <h2>Detalle de deuda #{{d.deudaId}}</h2>
-      <mat-chip [ngClass]="d.estado === 'Pagada' ? 'chip-paid' : 'chip-pending'">{{ d.estado === 'Pagada' ? 'Pagada' : 'Pendiente' }}</mat-chip>
+      <h2>Detalle de deuda #{{deuda()?.deudaId}}</h2>
+      <mat-chip [ngClass]="deuda()?.estado === 'Pagada' ? 'chip-paid' : 'chip-pending'">{{ deuda()?.estado === 'Pagada' ? 'Pagada' : deuda()?.estado }}</mat-chip>
     </div>
-
     <form [formGroup]="form" class="grid">
       <mat-form-field appearance="fill">
         <mat-label>Descripción</mat-label>
-        <input matInput formControlName="descripcion" [readonly]="d.estado === 'Pagada'">
+        <input matInput formControlName="descripcion" [readonly]="deuda()?.estado === 'Pagada'">
       </mat-form-field>
-
       <mat-form-field appearance="fill">
         <mat-label>Monto total</mat-label>
-        <input matInput type="number" formControlName="montoTotal" step="0.01" [readonly]="d.estado === 'Pagada'">
+        <input matInput type="number" formControlName="montoTotal" step="0.01" [readonly]="deuda()?.estado === 'Pagada'">
         <mat-error *ngIf="form.get('montoTotal')?.hasError('min')">Debe ser mayor que 0</mat-error>
       </mat-form-field>
     </form>
-
     <div class="actions">
-      <button mat-raised-button color="primary" (click)="guardarCambios()" [disabled]="d.estado === 'Pagada' || form.invalid">Guardar</button>
-      <button mat-stroked-button color="warn" (click)="eliminar()" [disabled]="d.estado === 'Pagada'">Eliminar</button>
+      <button mat-raised-button color="primary" (click)="guardarCambios()" [disabled]="deuda()?.estado === 'Pagada' || form.invalid">Guardar</button>
+      <button mat-stroked-button color="warn" (click)="eliminar()" [disabled]="deuda()?.estado === 'Pagada'">Eliminar</button>
       <a mat-button routerLink="/deudas">Volver</a>
     </div>
   </mat-card>
-
   <mat-card>
     <h3>Registrar pago</h3>
     <form [formGroup]="pagoForm" class="grid">
@@ -33,7 +29,6 @@
         <input matInput type="number" formControlName="montoPago" step="0.01">
         <mat-error *ngIf="pagoForm.get('montoPago')?.hasError('min')">Debe ser mayor que 0</mat-error>
       </mat-form-field>
-
       <mat-form-field appearance="fill">
         <mat-label>Método de pago</mat-label>
         <input matInput formControlName="metodoPago" placeholder="Efectivo, Transferencia, ...">
@@ -42,3 +37,9 @@
     <button mat-raised-button color="accent" (click)="registrarPago()" [disabled]="pagoForm.invalid">Registrar pago</button>
   </mat-card>
 </ng-container>
+<ng-template #noDeuda>
+  <mat-card>
+    <h2>No se encontró la deuda solicitada.</h2>
+    <a mat-button routerLink="/deudas">Volver al listado</a>
+  </mat-card>
+</ng-template>

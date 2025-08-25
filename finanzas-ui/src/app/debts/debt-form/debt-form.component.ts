@@ -38,7 +38,15 @@ export class DeudaFormComponent {
       descripcion: this.form.value.descripcion!,
     };
     debugger;
-    this.api.crearDeuda(dto).subscribe(() => this.router.navigate(['/deudas']));
+    this.api.crearDeuda(dto).subscribe({
+      next: () => {
+        alert('Deuda creada exitosamente');
+        this.router.navigate(['/deudas']);
+      },
+      error: (err) => {
+        alert('Error al crear la deuda: ' + JSON.stringify(err));
+      }
+    });
   }
 
   cancelar() {
