@@ -117,15 +117,6 @@ Sistema de gestión de deudas y pagos
   "SaldoPendiente": 300000,
   "Estado": "Parcial"
 }
-```
-
-### Captura de pantalla
-
-Puedes agregar una imagen de la UI en el README:
-
-```md
-![Finanzas UI](./screenshot.png)
-```
 
 ## Tecnologías implementadas
 
