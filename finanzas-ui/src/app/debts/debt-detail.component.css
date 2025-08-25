@@ -1,0 +1,3 @@
+.header{ display:flex; align-items:center; gap:12px; justify-content:space-between; }
+.grid{ display:grid; gap:16px; max-width:520px; }
+.actions{ display:flex; gap:12px; margin-top:8px; }

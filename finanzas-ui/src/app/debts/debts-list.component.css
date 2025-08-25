@@ -1,0 +1,4 @@
+.header{ display:flex; align-items:center; justify-content:space-between; gap:16px; }
+.filters{ display:flex; gap:12px; padding: 8px 0 16px; }
+.loading{ display:flex; justify-content:center; padding:32px; }
+table{ width:100%; }
